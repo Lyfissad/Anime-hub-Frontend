@@ -17,16 +17,32 @@ const PLACEHOLDERS = Array.from({ length: 5 }, (_, i) => (
     className="ml-1 w-[19rem] h-[8rem] mb-6 bg-neutral-800 animate-pulse rounded-lg"
   />
 ));
+const currentYear = new Date().getFullYear();
+
+const month = new Date().getMonth();
+
+let currentSeason = "WINTER";
+
+if (month >= 2 && month <= 4) {
+  currentSeason = "SPRING";
+} else if (month >= 5 && month <= 7) {
+  currentSeason = "SUMMER";
+} else if (month >= 8 && month <= 10) {
+  currentSeason = "FALL";
+}
+
+
 
 const newEpisodes = gql`
-  query ($page: Int) {
+  query ($page: Int, $currentYear: Int, $currentSeason: MediaSeason) {
     Page(page: $page, perPage: 8) {
       __typename
       media(
         type: ANIME
         status: RELEASING
-        season: SPRING
-        seasonYear: 2025
+        season: $currentSeason
+        seasonYear: $currentYear
+        isAdult: false
       ) {
         id
         trailer {

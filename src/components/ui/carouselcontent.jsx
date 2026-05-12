@@ -15,15 +15,36 @@ import TrailerButton from "../TrailerButton";
 const Content = () => {
     const [seasonalData, setSeasonalData] = useState(null)
 
-//fetching query for seasonal anime year 2025
+
+
+
+const currentYear = new Date().getFullYear();
+
+const month = new Date().getMonth();
+
+let currentSeason = "WINTER";
+
+if (month >= 2 && month <= 4) {
+  currentSeason = "SPRING";
+} else if (month >= 5 && month <= 7) {
+  currentSeason = "SUMMER";
+} else if (month >= 8 && month <= 10) {
+  currentSeason = "FALL";
+}
+
+
+
+//fetching query for seasonal anime year 2026
     const seasonal = gql`
-        query{
+        query($currentYear: Int, $currentSeason: MediaSeason){
             Page(page: 1, perPage: 15){
                 media(
                 type: ANIME
                 status: RELEASING
                 sort : TRENDING_DESC
-                seasonYear : 2025
+                season: $currentSeason
+                seasonYear : $currentYear
+                isAdult: false
                 ){
                     id
                     coverImage{

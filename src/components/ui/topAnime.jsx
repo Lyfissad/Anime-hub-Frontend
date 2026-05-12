@@ -27,7 +27,7 @@ export default function TopAnime(){
     const getTop = gql`
             query{
                 Page(page:1, perPage: 20){
-                    media(type: ANIME, sort: SCORE_DESC){
+                    media(type: ANIME, sort: SCORE_DESC, isAdult: false){
                     id
                     title{
                                 romaji
