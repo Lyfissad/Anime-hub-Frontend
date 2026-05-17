@@ -42,11 +42,11 @@ import { SliceStingByWords } from "./topAnime";
         onLoad={() => {
           console.log("images loaded")
           setImageLoaded(true)}} />
-        <h2 className="font-bold text-text-pri text-xl minitab:text-3xl m-5">
+        <h2 className="font-bold text-text-pri text-2xl minitab:text-3xl mx-5 mt-6 -mb-2">
           {item.title.english || item.title.romaji || item.title.native}
         </h2>
     </DrawerHeader>
-        <DrawerDescription className="p-4 text-sm text-text-mute">
+        <DrawerDescription className="my-6 mx-12 text-lg text-text-mute">
             {StringCleanDescription(SliceStingByWords(item.description || "No description", 60))}
         </DrawerDescription>
       <DrawerFooter>

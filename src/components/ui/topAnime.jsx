@@ -23,11 +23,12 @@ export default function TopAnime(){
     const [selected, setSelected] = useState(null)
     const [isOpen, setIsOpen] = useState(false)
 
+
     //query for top anime by ranking
     const getTop = gql`
-            query{
+            query getTop($currentYear: Int, $currentSeason: MediaSeason){
                 Page(page:1, perPage: 20){
-                    media(type: ANIME, sort: SCORE_DESC, isAdult: false){
+                    media(type: ANIME, sort: SCORE_DESC, season: $currentSeason, seasonYear: $currentYear){
                     id
                     title{
                                 romaji
@@ -53,9 +54,24 @@ export default function TopAnime(){
     `;
 
     
+const currentYear = new Date().getFullYear();
+
+const month = new Date().getMonth();
+
+let currentSeason = "WINTER";
+
+if (month >= 2 && month <= 4) {
+  currentSeason = "SPRING";
+} else if (month >= 5 && month <= 7) {
+  currentSeason = "SUMMER";
+} else if (month >= 8 && month <= 10) {
+  currentSeason = "FALL";
+}
 
 
-    const {data} = useSuspenseQuery(getTop, {fetchPolicy: 'network-only'})
+
+
+    const {data} = useSuspenseQuery(getTop, {fetchPolicy: 'cache-and-network', variables: {currentSeason, currentYear}})
 
 
         useEffect(() => {
@@ -130,11 +146,11 @@ export default function TopAnime(){
 
     }
 
-    function TopPlaceHolder(){
-            <div className={`mt-8 phone:min-w-[10rem] phone:h-[22rem] minitab:min-h-[30rem] overflow-visible minitab:min-w-[15rem] p-2 cursor-pointer
-            transition-all  bg-neutral-800 animate-pulse transition-filter ease-in-out duration-300`}></div>
-    }
-
+    function TopPlaceHolder() {
+  return (
+    <div className="mt-8 phone:min-w-[10rem] phone:h-[22rem] minitab:min-h-[30rem] overflow-visible minitab:min-w-[15rem] p-2 cursor-pointer transition-all bg-neutral-800 animate-pulse" />
+  );
+}
 
     const placeHolderTiles = Array.from({length : 20}, (_, i) => <TopPlaceHolder key = {i} /> )
 
@@ -157,7 +173,7 @@ export default function TopAnime(){
             {place? <div className="bg-neutral-800 animate-pulse rounded-xl h-[4rem] minitab:w-[30rem] mb-3"></div> :
              <h1 
             className="font-headings text-text-pri text-2xl mb-5 fade-in ">
-                Check out our highest rated shows!
+                Current highest rated shows!
             </h1>}
 
 

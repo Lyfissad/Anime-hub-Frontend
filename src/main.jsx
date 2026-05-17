@@ -6,12 +6,15 @@ import { ApolloProvider} from '@apollo/client'
 import client from './apolloClient'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './Context/AuthContext'
+import FilterProvider from './Context/isAdultContext'
 
 createRoot(document.getElementById('root')).render(
     <ApolloProvider client={client}>
     <BrowserRouter>
     <AuthProvider >
-    <App />
+    <FilterProvider>
+        <App />
+    </FilterProvider>
     </AuthProvider>
     </BrowserRouter>
     </ApolloProvider>

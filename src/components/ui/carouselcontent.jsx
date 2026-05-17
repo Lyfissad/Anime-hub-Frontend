@@ -6,16 +6,18 @@ import {
   } from "@/components/ui/carousel"
   import { IoPlayOutline } from "react-icons/io5";
 import { gql, useSuspenseQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
 import BannerOverlay from "../BannerOverlay";
 import TrailerButton from "../TrailerButton";
+import { useIsAdult } from "@/Context/isAdultContext";
+
 
 const Content = () => {
     const [seasonalData, setSeasonalData] = useState(null)
 
-
+    const { isAdult } = useIsAdult()
 
 
 const currentYear = new Date().getFullYear();
@@ -36,7 +38,7 @@ if (month >= 2 && month <= 4) {
 
 //fetching query for seasonal anime year 2026
     const seasonal = gql`
-        query($currentYear: Int, $currentSeason: MediaSeason){
+        query($currentYear: Int, $currentSeason: MediaSeason, $isAdultFilter: Boolean){
             Page(page: 1, perPage: 15){
                 media(
                 type: ANIME
@@ -44,7 +46,7 @@ if (month >= 2 && month <= 4) {
                 sort : TRENDING_DESC
                 season: $currentSeason
                 seasonYear : $currentYear
-                isAdult: false
+                isAdult: $isAdultFilter
                 ){
                     id
                     coverImage{
@@ -68,8 +70,20 @@ if (month >= 2 && month <= 4) {
             }
         }
     `
+    
+    const isAdultFilter = useMemo(() => {
+         if (isAdult === "sfw") {
+      return false;
+    } else if (isAdult === "nsfw") {
+      return true;
+    } else {
+      return undefined;
+    }
+    }, [isAdult])
+    
+     
 
-    const {data} = useSuspenseQuery(seasonal,{fetchPolicy: "cache-first"})
+    const {data} = useSuspenseQuery(seasonal,{fetchPolicy: "cache-first", variables: {currentSeason, currentYear, isAdultFilter}})
 
 
     useEffect(()=>{
@@ -137,8 +151,8 @@ const tiles = Array.isArray(seasonalData)
         ))
     : null;
 
-
-
+    
+     
     return(
         <div>
         <CarouselContent className="fade-in min-h-5/6">

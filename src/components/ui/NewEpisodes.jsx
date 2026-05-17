@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ImTv } from "react-icons/im";
 import { gql, useQuery } from "@apollo/client";
 import {
@@ -9,7 +9,7 @@ import {
 import AnimeInfoDrawer from "./AnimeInfoDrawer";
 import { ErrorBoundary } from "../ErrorBoundary";
 import { AiOutlineLoading } from "react-icons/ai";
-
+import { useIsAdult } from "@/Context/isAdultContext";
 
 const PLACEHOLDERS = Array.from({ length: 5 }, (_, i) => (
   <div
@@ -17,6 +17,10 @@ const PLACEHOLDERS = Array.from({ length: 5 }, (_, i) => (
     className="ml-1 w-[19rem] h-[8rem] mb-6 bg-neutral-800 animate-pulse rounded-lg"
   />
 ));
+
+
+
+
 const currentYear = new Date().getFullYear();
 
 const month = new Date().getMonth();
@@ -34,7 +38,7 @@ if (month >= 2 && month <= 4) {
 
 
 const newEpisodes = gql`
-  query ($page: Int, $currentYear: Int, $currentSeason: MediaSeason) {
+  query newEpisodes($page: Int, $currentYear: Int, $currentSeason: MediaSeason, $isAdultFilter: Boolean) {
     Page(page: $page, perPage: 8) {
       __typename
       media(
@@ -42,7 +46,7 @@ const newEpisodes = gql`
         status: RELEASING
         season: $currentSeason
         seasonYear: $currentYear
-        isAdult: false
+        isAdult: $isAdultFilter
       ) {
         id
         trailer {
@@ -71,6 +75,7 @@ const newEpisodes = gql`
 `;
 
 function EpisodesTiles({ item }) {
+
   return (
     <div className="flex cursor-pointer mb-6 h-[8rem] w-[21rem] fade-in">
       <img
@@ -98,16 +103,30 @@ function EpisodesTiles({ item }) {
 }
 
 export default function NewEpisodes() {
+  const { isAdult } = useIsAdult()
   const [loadingMore, setLoadingMore] = useState(false)
   const [page, setPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
+  
+    
+    const isAdultFilter = useMemo(() => {
+        if (isAdult === "sfw") {
+      return false;
+    } else if (isAdult === "nsfw") {
+      return true;
+    } else {
+      return undefined;
+    }
+ }, [isAdult])
+
+
   const ButtonLoadState = loadingMore? <AiOutlineLoading className="fill-vibeBlack size-8 animate-spin"/> : "SHOW MORE"
 
 
   const { data, loading, fetchMore } = useQuery(newEpisodes, {
-    variables: { page: 1 },
+    variables: { page: 1, currentYear, currentSeason, isAdultFilter},
     notifyOnNetworkStatusChange: true,
   });
 
@@ -116,7 +135,7 @@ export default function NewEpisodes() {
   const handlePageChange = async () => {
     setLoadingMore(true)
     await fetchMore({
-      variables: { page: page + 1 },
+      variables: { page: page + 1},
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
 
@@ -154,7 +173,7 @@ export default function NewEpisodes() {
             New Episodes
           </h1>
         </div>
-        <h4 className="text-text-pri phone:text-xl font-headings">Today</h4>
+        <h4 className="text-text-pri phone:text-xl font-headings">Upcoming week</h4>
         <hr className="w-7/8 my-3" />
 
         <Drawer>
