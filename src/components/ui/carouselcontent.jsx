@@ -38,13 +38,12 @@ if (month >= 2 && month <= 4) {
 
 //fetching query for seasonal anime year 2026
     const seasonal = gql`
-        query($currentYear: Int, $currentSeason: MediaSeason, $isAdultFilter: Boolean){
+        query($currentYear: Int, $isAdultFilter: Boolean){
             Page(page: 1, perPage: 15){
                 media(
                 type: ANIME
                 status: RELEASING
                 sort : TRENDING_DESC
-                season: $currentSeason
                 seasonYear : $currentYear
                 isAdult: $isAdultFilter
                 ){
@@ -83,7 +82,7 @@ if (month >= 2 && month <= 4) {
     
      
 
-    const {data} = useSuspenseQuery(seasonal,{fetchPolicy: "cache-first", variables: {currentSeason, currentYear, isAdultFilter}})
+    const {data} = useSuspenseQuery(seasonal,{fetchPolicy: "cache-and-network", variables: {currentYear, isAdultFilter}})
 
 
     useEffect(()=>{
@@ -139,7 +138,7 @@ const tiles = Array.isArray(seasonalData)
                 <div className="phone:bg-crimAccent phone:block minitab:invisible 
                 w-full h-8 absolute flex items-center space-x-20 justify-center px-4">
                     <TrailerButton trailer={item.trailer}/>
-                    <div className='text-crimAccent flex items-center justify-center font-playful text-vibeBlack mr-8'>{<AiOutlineStar className="mr-1" />} { item.averageScore}</div>
+                    <div className='flex items-center justify-center font-playful text-vibeBlack mr-8'>{<AiOutlineStar className="mr-1" />} { item.averageScore}</div>
                 </div>
                 <button onClick={()=>{alert("Not implemented yet,Sorry.")}} className="phone:w-80 minitab:invisible h-10 flex
                  items-center justify-center relative top-12 text-md bg-crimAccent border-4 border-vibeBlack

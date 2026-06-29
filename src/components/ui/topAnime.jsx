@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useRef, useState } from "react"
-import { gql, useSuspenseQuery } from "@apollo/client"
+import { gql, useQuery, useSuspenseQuery } from "@apollo/client"
 import { StringCleanDescription } from "../BannerOverlay"
 import {
     Drawer,
@@ -26,9 +26,9 @@ export default function TopAnime(){
 
     //query for top anime by ranking
     const getTop = gql`
-            query getTop($currentYear: Int, $currentSeason: MediaSeason){
+            query getTop($currentYear: Int){
                 Page(page:1, perPage: 20){
-                    media(type: ANIME, sort: SCORE_DESC, season: $currentSeason, seasonYear: $currentYear){
+                    media(type: ANIME, sort: SCORE_DESC, seasonYear: $currentYear){
                     id
                     title{
                                 romaji
@@ -71,10 +71,9 @@ if (month >= 2 && month <= 4) {
 
 
 
-    const {data} = useSuspenseQuery(getTop, {fetchPolicy: 'cache-and-network', variables: {currentSeason, currentYear}})
+    const {data} = useSuspenseQuery(getTop, {fetchPolicy: 'cache-and-network', variables: {currentYear}})
 
-
-        useEffect(() => {
+    useEffect(() => {
     if (data) {
         setTopdata(data.Page.media);
         setPlace(false);

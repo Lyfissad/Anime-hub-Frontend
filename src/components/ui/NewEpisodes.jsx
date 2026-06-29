@@ -74,6 +74,42 @@ const newEpisodes = gql`
   }
 `;
 
+
+const backupNewEpisodes = gql`
+  query newEpisodes($page: Int,$isAdultFilter: Boolean) {
+    Page(page: $page, perPage: 8) {
+      __typename
+      media(
+        type: ANIME
+        status: RELEASING
+        isAdult: $isAdultFilter
+      ) {
+        id
+        trailer {
+          id
+          site
+        }
+        bannerImage
+        title {
+          romaji
+          english
+          native
+        }
+        coverImage {
+          large
+          extraLarge
+        }
+        description
+        duration
+        nextAiringEpisode {
+          episode
+          airingAt
+        }
+      }
+    }
+  }
+`;
+
 function EpisodesTiles({ item }) {
 
   return (
@@ -127,10 +163,28 @@ export default function NewEpisodes() {
 
   const { data, loading, fetchMore } = useQuery(newEpisodes, {
     variables: { page: 1, currentYear, currentSeason, isAdultFilter},
-    notifyOnNetworkStatusChange: true,
+    notifyOnNetworkStatusChange: true, fetchPolicy: "cache-first"
   });
 
-  const allEpisodes = data?.Page?.media || [];
+
+  
+  
+/* BACKUP QUERY CAUSED TOO MANY REQUEST ERROR
+  const {data: backUpData} = useQuery(backupNewEpisodes, {
+    variables: { page: 1, currentYear, currentSeason, isAdultFilter},
+    notifyOnNetworkStatusChange: true, fetchPolicy: "cache-first", skip: data?.Page?.media?.length !== 0
+  });
+
+
+  if(data?.Page?.media?.length === 0){
+      allEpisodes = backUpData?.Page?.media || [];
+  } 
+
+*/
+  
+  let allEpisodes = data?.Page?.media || [];
+  
+  
 
   const handlePageChange = async () => {
     setLoadingMore(true)

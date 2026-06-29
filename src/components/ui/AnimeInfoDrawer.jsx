@@ -8,7 +8,6 @@ import {
     DrawerTitle,
     DrawerTrigger,
   } from "@/components/ui/drawer"
-import { AiOutlineLoading } from "react-icons/ai";
 import { useEffect, useState } from "react"
 import { StringCleanDescription } from "../BannerOverlay"
 import TrailerButton from "../TrailerButton";
@@ -28,6 +27,7 @@ import { SliceStingByWords } from "./topAnime";
   return (
 
     <>
+    <DrawerContent className="bg-vibeBlack text-text-pri h-dvh max-h-dvh shadow-none outline-none overflow-y-auto">
       <DrawerHeader>
         <DrawerClose asChild>
             <IoIosCloseCircle 
@@ -42,11 +42,11 @@ import { SliceStingByWords } from "./topAnime";
         onLoad={() => {
           console.log("images loaded")
           setImageLoaded(true)}} />
-        <h2 className="font-bold text-text-pri text-2xl minitab:text-3xl mx-5 mt-6 -mb-2">
-          {item.title.english || item.title.romaji || item.title.native}
-        </h2>
     </DrawerHeader>
-        <DrawerDescription className="my-6 mx-12 text-lg text-text-mute">
+        <DrawerDescription className="my-6 mx-10 text-lg text-text-mute">
+          <h2 className="font-bold text-text-pri text-xl minitab:text-3xl mt-6 mb-5">
+          {item.title.english || item.title.romaji || item.title.native}
+          </h2>
             {StringCleanDescription(SliceStingByWords(item.description || "No description", 60))}
         </DrawerDescription>
       <DrawerFooter>
@@ -56,9 +56,10 @@ import { SliceStingByWords } from "./topAnime";
             </div>
             <button 
             onClick={()=>{alert("Not Implemented yet...")}}
-            className = "h-[3rem] w-full cursor-pointer font-semibold rounded-lg bg-crimAccent">Watch Now</button>
+            className = "h-[3rem] w-full cursor-pointer font-semibold text-vibeBlack rounded-lg bg-crimAccent">Watch Now</button>
         </div>
       </DrawerFooter>
+      </DrawerContent>
     </>
   );
 }

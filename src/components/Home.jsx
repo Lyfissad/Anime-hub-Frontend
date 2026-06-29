@@ -8,12 +8,12 @@ import TrialBox from './ui/trialBox';
 import NewEpisodes from './ui/NewEpisodes';
 import Footer from './ui/Footer';
 import { Suspense } from 'react';
-
-
+import { useState } from 'react';
+import ConfirmLogOut from './ui/ConfirmLogout';
 
 
 function Home() {
-
+const [showLC, setShowLC] = useState(false) //LogOut confirm box state
 
 {/*fetching data moved to other components*/}
 
@@ -21,7 +21,8 @@ function Home() {
 
 return (
 	<div className="h-full">
-		<Header />
+		<Header setShowLC = {setShowLC}/>
+		{showLC && <ConfirmLogOut cancel = {setShowLC}/>}
 		<Carousel>
 			<Suspense fallback = {<div className="flex justify-center items-center min-h-screen w-full h-full">
                     <AiOutlineLoading className='fill-crimAccent size-18 spinFast m-auto'/>
