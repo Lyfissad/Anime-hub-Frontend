@@ -18,6 +18,7 @@ import { CgProfile } from "react-icons/cg";
 import { useAuth } from "@/Context/useAuth";
 import SearchInput from "./SearchInput.jsx";
 
+
   
 
 
@@ -25,6 +26,9 @@ export default function Header(props){
     const [open,setOpen] = useState(false)
     const { user } = useAuth()
     
+
+
+
 
 
 

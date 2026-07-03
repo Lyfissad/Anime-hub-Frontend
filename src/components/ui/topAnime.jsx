@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useRef, useState } from "react"
-import { gql, useQuery, useSuspenseQuery } from "@apollo/client"
+import { gql, useSuspenseQuery } from "@apollo/client"
 import { StringCleanDescription } from "../BannerOverlay"
 import {
     Drawer,
@@ -55,20 +55,6 @@ export default function TopAnime(){
 
     
 const currentYear = new Date().getFullYear();
-
-const month = new Date().getMonth();
-
-let currentSeason = "WINTER";
-
-if (month >= 2 && month <= 4) {
-  currentSeason = "SPRING";
-} else if (month >= 5 && month <= 7) {
-  currentSeason = "SUMMER";
-} else if (month >= 8 && month <= 10) {
-  currentSeason = "FALL";
-}
-
-
 
 
     const {data} = useSuspenseQuery(getTop, {fetchPolicy: 'cache-and-network', variables: {currentYear}})

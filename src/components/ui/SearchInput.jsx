@@ -1,12 +1,55 @@
-import { useState } from "react";
-
-
+import { useEffect, useState } from "react";
+import { gql, useLazyQuery } from "@apollo/client";
+import { AiOutlineLoading } from "react-icons/ai"
 
 
 export default function SearchInput(){
-    const [loading, setLoading] = useState(false)
     const[query, setQuery] = useState("")
     const [suggestions, setSuggestions] = useState([])
+
+
+    const SEARCH_ANIME = gql`
+    query SearchAnime($query: String){
+        Page(page: 1 , perPage: 10){
+            media(type: ANIME, search: $query){
+                    id
+                    title{
+                        romaji
+                        english
+                        native
+                    }
+                    coverImage{
+                        large
+                    }
+                    averageScore
+            }
+        }
+    }`
+
+
+    const [searchAnime, {data: searchData, loading, error}] = useLazyQuery(SEARCH_ANIME, {fetchPolicy: 'cache-and-network'})
+    console.log("loading:", loading)
+    console.log("data:", searchData)
+    console.log("error:", error)
+
+
+    useEffect(() => {
+        if (!query.trim()) return;
+        console.log("Effect ran: ", query )
+        const timer = setTimeout(() => {
+              searchAnime({variables: {query}})
+              console.log("searching: ", query)
+        }, 500);
+
+        return () => clearTimeout(timer)
+    }, [query])
+
+
+    useEffect(() => {
+      if (searchData){
+        setSuggestions(searchData.Page.media);
+      }
+    }, [searchData])
 
     return(
         <div className="relative w-[67%]">
@@ -20,16 +63,19 @@ export default function SearchInput(){
   />
 
   {query && (
-    <div className="absolute top-12 left-0 w-full bg-vibeBlack border border-neutral-700 z-50 max-h-96 overflow-y-auto">
+    <div className="absolute top-12 left-0 w-[180%
+    ] bg-vibeBlack border border-neutral-700 z-50 max-h-96 overflow-y-auto">
       
       {loading && (
-        <p className="p-2 text-text-mute">Loading...</p>
+        <div className="flex space-5">
+          <AiOutlineLoading className='fill-crimAccent size-6 my-auto ml-2 spinFast'/><p className="font-playful text-crimAccent">Loading...</p>
+        </div>
       )}
 
       {suggestions.map((anime) => (
         <div
           key={anime.id}
-          className="flex items-center gap-3 p-2 hover:bg-neutral-800 cursor-pointer"
+          className="flex items-center font-headings gap-3 p-2 hover:bg-neutral-800 cursor-pointer"
           onClick={() => {
             setQuery(anime.title.english || anime.title.romaji);
             setSuggestions([]);
