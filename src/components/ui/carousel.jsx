@@ -1,9 +1,9 @@
 import * as React from "react"
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react"
-
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+
 
 const CarouselContext = React.createContext(null)
 
@@ -73,6 +73,8 @@ function Carousel({
     };
   }, [api, onSelect])
 
+ 
+
   return (
     <CarouselContext.Provider
       value={{
@@ -105,6 +107,8 @@ function CarouselContent({
 }) {
   const { carouselRef, orientation } = useCarousel()
 
+
+  
   return (
     <div
       ref={carouselRef}
@@ -154,7 +158,7 @@ function CarouselPrevious({
       data-slot="carousel-previous"
       variant={variant}
       size={size}
-      className={cn("absolute size-8 rounded-full cursor-pointer active:scale-120 transition-all duration-200 !bg-transparent !outline-none !border-none !shadow-none !ring-0 !focus:ring-0 !focus:outline-none !focus:border-none", orientation === "horizontal"
+      className={cn("size-8 rounded-full cursor-pointer active:scale-130 transition-all duration-200 !bg-transparent !outline-none !border-none !shadow-none !ring-0 !focus:ring-0 !focus:outline-none !focus:border-none", orientation === "horizontal"
         ? "top-1/2 -left-12 -translate-y-1/2"
         : "-top-12 left-1/2 -translate-x-1/2 rotate-90", className)}
       disabled={!canScrollPrev}
@@ -179,7 +183,7 @@ function CarouselNext({
       data-slot="carousel-next"
       variant={variant}
       size={size}
-      className={cn("absolute size-8 rounded-full cursor-pointer active:scale-140 transition-all duration-200 !bg-transparent !outline-none !border-none !shadow-none !ring-0 !focus:ring-0 !focus:outline-none !focus:border-none", orientation === "horizontal"
+      className={cn("size-8 rounded-full cursor-pointer active:scale-13s0 transition-all duration-200 !bg-transparent !outline-none !border-none !shadow-none !ring-0 !focus:ring-0 !focus:outline-none !focus:border-none", orientation === "horizontal"
         ? "top-1/2 -right-12 -translate-y-1/2"
         : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90", className)}
       disabled={!canScrollNext}

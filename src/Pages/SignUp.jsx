@@ -4,13 +4,14 @@ import { toast } from "react-toastify"
 import { AiOutlineLoading } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import validatePassword from "./validatePassword";
-
-
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
 
 
 export default function SignUp() {
     const [loading, setLoading] = useState(false)
     const [PasswordErrors, setPasswordErrors] = useState([])
+    const [show, setShow] = useState(false)
     const [signupData, setSignupData] = useState({
         username: "",
         email: "",
@@ -23,6 +24,8 @@ export default function SignUp() {
 
     const navigate = useNavigate()
 
+
+    const passType = show === false? "password" : "text"
 
     function handleChange(e){
         if(e.target.name === "preferences"){
@@ -43,8 +46,6 @@ export default function SignUp() {
         if (numberOfErrors.length > 0){
             setPasswordErrors(numberOfErrors)
             setSignupData({
-                username: "",
-                email: "",
                 password: "",
                 confirmPassword: "",
                 preferences: []
@@ -122,16 +123,19 @@ export default function SignUp() {
             />
 
             <input 
-                type="password" 
+                type={passType}
                 name = "password"
                 value={signupData.password} 
                 placeholder = "Password" 
                 onChange={handleChange}
                 className="w-full bg-vibeBlack px-4 py-2 rounded-md my-2 border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent"
             />
-
+            {show?
+            <FaEyeSlash className="fixed cursor-pointer right-195 bottom-68 fill-text-mute" onClick={() => setShow(prevShow => !prevShow)}/> : 
+            <FaEye className="fixed cursor-pointer right-195 bottom-68 fill-text-mute" onClick={() => setShow(prevShow => !prevShow)} />
+            }
             <input 
-                type="password" 
+                type={passType}
                 name = "confirmPassword"
                 value={signupData.confirmPassword} 
                 placeholder = "Confirm Password" 

@@ -235,7 +235,7 @@ export default function NewEpisodes() {
             {loading && !data ? PLACEHOLDERS : EpisodeTilesUI}
           </div>
 
-          <DrawerContent className="bg-vibeBlack border-none outline:none minitab:max-w-[70%] h-[80%] mx-auto">
+          <DrawerContent className="bg-vibeBlack border-vibe outline:none minitab:max-w-[70%] h-[80%] mx-auto">
             <ErrorBoundary>
               {selected && isOpen && <AnimeInfoDrawer item={selected} />}
             </ErrorBoundary>

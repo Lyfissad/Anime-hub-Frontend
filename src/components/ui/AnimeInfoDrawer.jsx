@@ -27,7 +27,7 @@ import { SliceStingByWords } from "./topAnime";
   return (
 
     <>
-    <DrawerContent className="bg-vibeBlack text-text-pri h-dvh max-h-dvh shadow-none outline-none overflow-y-auto">
+    <DrawerContent className="bg-vibeBlack text-text-pri h-dvh max-h-dvh border-none shadow-none outline-none overflow-y-auto">
       <DrawerHeader>
         <DrawerClose asChild>
             <IoIosCloseCircle 

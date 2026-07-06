@@ -33,7 +33,7 @@ export default function Header(props){
 
 
     return(
-        <div className="flex justify-center items-center bg-vibeBlack h-13 p-4 w-full">
+        <div className="flex justify-center items-center bg-vibeBlack h-15 p-4 w-full">
             <Drawer className = "">
             <DrawerTrigger><SlMenu className = "fill-crimAccent size-8 phone:block minitab:hidden"/></DrawerTrigger>
             <DrawerContent className="h-[70%] bg-vibeBlack fade-in">
@@ -76,9 +76,9 @@ export default function Header(props){
                 <PopoverTrigger asChild className="ml-auto">
                     <IoMdSearch className="size-9 fill-crimAccent ml-3 justify-center cursor-pointer" onClick={()=>setOpen(true)}/>
                 </PopoverTrigger>
-                <PopoverContent className="bg-vibeBlack h-80 phone:w-95 minitab:w-150">
-                    <div>
-                        <SearchInput className="w-[80%]"/>
+                <PopoverContent className="bg-vibeBlack border-none mt-2 mx-2 h-80 phone:w-95 minitab:w-150">
+                    <div className="bg-vibeBlack h-70 phone:w-90 minitab:w-140">
+                        <SearchInput/>
                     </div>
                 </PopoverContent>
             </Popover>
@@ -87,7 +87,7 @@ export default function Header(props){
             {user? 
             <Popover className = "justify-start">
                 <PopoverTrigger>
-                    <CgProfile className="size-10 mr-1 ml-2 text-ember phone:hidden minitab:flex cursor-pointer" />
+                    <CgProfile className="size-10 mr-1 ml-2 text-crimAccent phone:hidden minitab:flex cursor-pointer" />
                 </PopoverTrigger>
                 <PopoverContent className={`bg-grayishDark outline-none shadow-none border-vibeBlack rounded-xl mr-3`}>
                         <ul className="my-5 ml-5">

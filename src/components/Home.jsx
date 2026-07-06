@@ -10,20 +10,36 @@ import Footer from './ui/Footer';
 import { Suspense } from 'react';
 import { useState } from 'react';
 import ConfirmLogOut from './ui/ConfirmLogout';
-
+import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
 
 function Home() {
 const [showLC, setShowLC] = useState(false) //LogOut confirm box state
 
 {/*fetching data moved to other components*/}
+ 
 
+
+
+
+{/* Carousel autoplay running with shadCN 5 sec delay*/}
+const autoplay = useRef(
+    Autoplay({
+      delay: 5000,
+      stopOnInteraction:false,
+      stopOnMouseEnter: true
+    })
+  )
 	
 
 return (
 	<div className="h-full">
 		<Header setShowLC = {setShowLC}/>
 		{showLC && <ConfirmLogOut cancel = {setShowLC}/>}
-		<Carousel>
+		<Carousel 
+			plugins={[autoplay.current]}
+			opts={{loop: true}}
+			>
 			<Suspense fallback = {<div className="flex justify-center items-center min-h-screen w-full h-full">
                     <AiOutlineLoading className='fill-crimAccent size-18 spinFast m-auto'/>
                 </div>}> 

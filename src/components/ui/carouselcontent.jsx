@@ -160,9 +160,9 @@ const tiles = Array.isArray(seasonalData)
                     <AiOutlineLoading className='fill-crimAccent size-18 spinFast m-auto'/>
                 </div>}
         </CarouselContent>
-        <div className="flex cursor-pointer shadow-none outline-none bg-none border-none justify-between absolute bottom-150 items-center w-full">
+        <div className="flex cursor-pointer shadow-none outline-none bg-none border-none justify-between relative bottom-150 items-center w-full">
         <CarouselPrevious className="bg-transparent text-black fade-in hover:bg-gray-200 phone:invisible minitab:visible  ml-20 mr-auto" />
-        <CarouselNext className="bg-transparent text-black fade-in hover:bg-gray-200 phone:invisible minitab:visible shadow-md ml-auto mr-20" />
+        <CarouselNext className="bg-transparent text-black fade-in hover:bg-crimAccent phone:invisible minitab:visible shadow-md ml-auto mr-20" />
         </div>
         </div>
     )
