@@ -19,7 +19,7 @@ export default function BannerOverlay(props){
                             {props.title}
                         </h1>
                         <div
-                            className="text-sm mb-50 ml-5 mt-5 font-playful max-w-2xl overflow-hidden max-h-[10rem] text-ellipsis">
+                            className="text-sm mb-50 ml-5 mt-5 font-playful max-w-2xl line-clamp-3 overflow-hidden max-h-[10rem] text-ellipsis">
                             <p>{StringCleanDescription(props.description) || "No description available." }</p>
                         </div>
                     <div className="flex items-center space-x-4  mb-30">

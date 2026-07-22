@@ -24,6 +24,7 @@ import SearchInput from "./SearchInput.jsx";
 
 export default function Header(props){
     const [open,setOpen] = useState(false)
+    
     const { user } = useAuth()
     
 
@@ -34,7 +35,7 @@ export default function Header(props){
 
     return(
         <div className="flex justify-center items-center bg-vibeBlack h-15 p-4 w-full">
-            <Drawer className = "">
+            <Drawer className = "" open={props.drawerOpen} onOpenChange={props.setDrawerOpen}>
             <DrawerTrigger><SlMenu className = "fill-crimAccent size-8 phone:block minitab:hidden"/></DrawerTrigger>
             <DrawerContent className="h-[70%] bg-vibeBlack fade-in">
                 {user? 
@@ -51,7 +52,10 @@ export default function Header(props){
                     <li className="">Popular</li>
                     <li className="">Browse all</li>
                 </ul>
-                {user? <button className="h-10 w-40 my-15 text-center flex items-center justify-center bg-crimAccent mx-auto rounded-3xl text-vibeBlack font-headings" onClick={() => props.setShowLC(true)}>Log Out</button> : null}
+                {user? <button className="h-10 w-40 my-15 text-center flex items-center justify-center bg-crimAccent mx-auto rounded-3xl text-vibeBlack font-headings" onClick={() => {
+                    props.setShowLC(true)
+                    props.setDrawerOpen(false)
+                    }}>Log Out</button> : null}
             </DrawerContent>
             </Drawer>
             <a href="https://anime-hub-ebon.vercel.app/" className="cursor-pointer">
@@ -97,7 +101,9 @@ export default function Header(props){
                                 <li className="my-3">
                                 <IsAdult className = "phone:hidden minitab:block"/>
                                 </li>
-                            <li  onClick={() => props.setShowLC(true)} className="h-10 w-30 my-15 text-center flex items-center justify-center cursor-pointer bg-crimAccent mx-auto rounded-3xl text-vibeBlack font-headings">Log Out</li>
+                            <li  onClick={() => {
+                                props.setShowLC(true)
+                            }} className="h-10 w-30 my-15 text-center flex items-center justify-center cursor-pointer bg-crimAccent mx-auto rounded-3xl text-vibeBlack font-headings">Log Out</li>
                         </ul>
                 </PopoverContent>
             </Popover> : 

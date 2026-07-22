@@ -22,19 +22,6 @@ const Content = () => {
 
 const currentYear = new Date().getFullYear();
 
-const month = new Date().getMonth();
-
-let currentSeason = "WINTER";
-
-if (month >= 2 && month <= 4) {
-  currentSeason = "SPRING";
-} else if (month >= 5 && month <= 7) {
-  currentSeason = "SUMMER";
-} else if (month >= 8 && month <= 10) {
-  currentSeason = "FALL";
-}
-
-
 
 //fetching query for seasonal anime year 2026
     const seasonal = gql`

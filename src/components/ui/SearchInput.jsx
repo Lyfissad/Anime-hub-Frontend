@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
 import { AiOutlineLoading } from "react-icons/ai"
+import { useNavigate } from "react-router-dom";
 
 
 export default function SearchInput(){
     const[query, setQuery] = useState("")
     const [suggestions, setSuggestions] = useState([])
 
-
+    const navigate = useNavigate()
     const SEARCH_ANIME = gql`
     query SearchAnime($query: String){
         Page(page: 1 , perPage: 10){
@@ -76,8 +77,7 @@ export default function SearchInput(){
                 key={anime.id}
                 className="flex items-center font-headings rounded-lg gap-3 p-2 hover:bg-neutral-800 cursor-pointer"
                 onClick={() => {
-                  setQuery(anime.title.english || anime.title.romaji);
-                  setSuggestions([]);
+                  navigate(`anime/${anime.title.english}`)
                 }}
               >
                 <img

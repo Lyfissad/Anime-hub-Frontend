@@ -23,7 +23,7 @@ export default function SignUp() {
 
 
     const navigate = useNavigate()
-
+    const EyeIcon = show? FaEyeSlash : FaEye
 
     const passType = show === false? "password" : "text"
 
@@ -105,13 +105,13 @@ export default function SignUp() {
 
     const buttonState = loading? <AiOutlineLoading className="fill-vibeBlack size-6 mx-auto animate-spin" /> : "Sign Up"
     return (
-        <form onSubmit = {handleSubmit}  className="text-text-pri font-playful fade-in transition-all duration-300 grid grid-cols-1 minitab:max-w-100 min-h-[420px] justify-center">
+        <form onSubmit = {handleSubmit}  className="text-text-pri font-playful fade-in transition-all duration-300 grid grid-cols-1 minitab:max-w-100 min-h-[420px] items-center justify-center">
             <input 
                 name = "username"
                 value={signupData.username} 
                 placeholder = "Username" 
                 onChange={handleChange} 
-                className="w-full bg-vibeBlack px-4 py-2 rounded-md my-2 border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent" 
+                className="w-full bg-vibeBlack px-4 py-3 rounded-md my-2 border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent" 
             />
 
             <input 
@@ -119,28 +119,26 @@ export default function SignUp() {
                 value={signupData.email}
                 placeholder = "Email" 
                 onChange={handleChange} 
-                className="w-full bg-vibeBlack px-4 py-2 rounded-md my-2 border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent"
+                className="w-full bg-vibeBlack px-4 py-3 rounded-md my-2 border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent"
             />
-
-            <input 
+            <div className="relative w-full my-2">
+                <input 
                 type={passType}
                 name = "password"
                 value={signupData.password} 
                 placeholder = "Password" 
                 onChange={handleChange}
-                className="w-full bg-vibeBlack px-4 py-2 rounded-md my-2 border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent"
+                className="w-full bg-vibeBlack px-4 py-3 pr-10 rounded-md border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent"
             />
-            {show?
-            <FaEyeSlash className="fixed cursor-pointer right-195 bottom-68 fill-text-mute" onClick={() => setShow(prevShow => !prevShow)}/> : 
-            <FaEye className="fixed cursor-pointer right-195 bottom-68 fill-text-mute" onClick={() => setShow(prevShow => !prevShow)} />
-            }
+            <EyeIcon className="absolute cursor-pointer my-auto right-3 -translate-y-1/2 top-1/2 fill-text-mute" onClick={() => setShow(prevShow => !prevShow)} />
+            </div>
             <input 
                 type={passType}
                 name = "confirmPassword"
                 value={signupData.confirmPassword} 
                 placeholder = "Confirm Password" 
                 onChange={handleChange} 
-                className="w-full bg-vibeBlack px-4 py-2 rounded-md my-2 border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent"
+                className="w-full bg-vibeBlack px-4 py-3 rounded-md my-2 border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent"
             />
             <button type = "submit" disabled = {loading} className="mt-4 p-3 cursor-pointer rounded-md bg-crimAccent hover:bg-crimAccent/90 text-vibeBlack font-headings">{buttonState}</button>
         </form>
