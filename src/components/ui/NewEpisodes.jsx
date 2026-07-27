@@ -75,6 +75,8 @@ const newEpisodes = gql`
 `;
 
 
+/*
+BACKUP CALL NOT USING IT RIGHT NOW
 const backupNewEpisodes = gql`
   query newEpisodes($page: Int,$isAdultFilter: Boolean) {
     Page(page: $page, perPage: 8) {
@@ -109,6 +111,7 @@ const backupNewEpisodes = gql`
     }
   }
 `;
+*/
 
 function EpisodesTiles({ item }) {
 
@@ -234,12 +237,9 @@ export default function NewEpisodes() {
           <div className="phone:grid mt-10 mx-auto phone:grid-cols-1 minitab:grid-cols-2 laptop:grid-cols-3 pc:grid-cols-4">
             {loading && !data ? PLACEHOLDERS : EpisodeTilesUI}
           </div>
-
-          <DrawerContent className="bg-vibeBlack border-vibe outline:none minitab:max-w-[70%] h-[80%] mx-auto">
             <ErrorBoundary>
               {selected && isOpen && <AnimeInfoDrawer item={selected} />}
             </ErrorBoundary>
-          </DrawerContent>
         </Drawer>
       </div>
 

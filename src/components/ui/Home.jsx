@@ -23,7 +23,7 @@ export default function Home(){
       )
         
     return(
-        <div>
+        <div className="bg-vibeBlack">
             <Carousel 
                         plugins={[autoplay.current]}
                         opts={{

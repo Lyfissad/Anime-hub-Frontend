@@ -14,7 +14,7 @@ const [drawerOpen,setDrawerOpen] = useState(false)
 
 
 return (
-	<div className="h-full">
+	<div className="h-full bg-vibeBlack">
 		<Header setShowLC = {setShowLC} drawerOpen ={drawerOpen} setDrawerOpen = {setDrawerOpen}/>
 		{showLC && <ConfirmLogOut setShowLC = {setShowLC} showLC = {showLC}/>}
 		<Outlet />

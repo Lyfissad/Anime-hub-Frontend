@@ -18,7 +18,6 @@ import { CgProfile } from "react-icons/cg";
 import { useAuth } from "@/Context/useAuth";
 import SearchInput from "./SearchInput.jsx";
 
-
   
 
 
@@ -26,51 +25,80 @@ export default function Header(props){
     const [open,setOpen] = useState(false)
     
     const { user } = useAuth()
-    
-
-
-
-
-
-
     return(
         <div className="flex justify-center items-center bg-vibeBlack h-15 p-4 w-full">
             <Drawer className = "" open={props.drawerOpen} onOpenChange={props.setDrawerOpen}>
             <DrawerTrigger><SlMenu className = "fill-crimAccent size-8 phone:block minitab:hidden"/></DrawerTrigger>
-            <DrawerContent className="h-[70%] bg-vibeBlack fade-in">
-                {user? 
-                <div>
-                    <h1 className="text-crimAccent mt-4 ml-12 text-3xl font-headings">Welcome back</h1>
-                    <h1 className="text-text-pri my-8 ml-12 text-2xl font-playful"> {user.username}</h1>
-                </div> : <Link to={"/auth/login"} className="h-10 w-40 my-15 text-center flex items-center justify-center bg-darkCrim mx-auto rounded-3xl text-text-pri font-headings">Login/SignUp</Link>}
-                <h2 className="my-6 ml-12 text-lg text-text-pri font-headings" >NSFW Filter:</h2>
-                <div className="flex justify-center border-2 border-darkCrim mx-auto">
-                    <IsAdult className = "phone:block minitab:hidden border-2 border-crimAccent"/>
+            <DrawerContent className="bg-vibeBlack h-[65dvh] fade-in flex flex-col">
+
+                {/* Header section */}
+                {user ? (
+                    <div className="shrink-0">
+                        <h1 className="text-crimAccent mt-4 ml-12 text-3xl font-headings">
+                            Welcome back
+                        </h1>
+                        <h1 className="text-text-pri my-8 ml-12 text-2xl font-playful">
+                            {user.username}
+                        </h1>
+                    </div>
+                ) : (
+                    <Link 
+                        to={"/auth/login"} 
+                        className="shrink-0 h-10 w-40 my-15 text-center flex items-center justify-center bg-darkCrim mx-auto rounded-3xl text-text-pri font-headings"
+                    >
+                        Login/SignUp
+                    </Link>
+                )}
+
+
+                {/* Scroll area */}
+                <div className="flex-1 overflow-y-auto">
+                    <h2 className="my-6 ml-12 text-lg text-text-pri font-headings">
+                        NSFW Filter:
+                    </h2>
+
+                    <div className="flex justify-center border-2 border-darkCrim mx-25">
+                        <IsAdult />
+                    </div>
+
+                    <ul className="space-y-5 text-xl ml-12 mt-4 text-text-pri font-playful">
+                        <li>New</li>
+                        <li>Popular</li>
+                        <li>Browse all</li>
+                    </ul>
                 </div>
-                <ul className="space-y-5 text-xl ml-12 mt-4 text-text-pri font-playful">
-                    <li className="">New</li>
-                    <li className="">Popular</li>
-                    <li className="">Browse all</li>
-                </ul>
-                {user? <button className="h-10 w-40 my-15 text-center flex items-center justify-center bg-crimAccent mx-auto rounded-3xl text-vibeBlack font-headings" onClick={() => {
-                    props.setShowLC(true)
-                    props.setDrawerOpen(false)
-                    }}>Log Out</button> : null}
+
+
+                {/* Bottom section */}
+                {user && (
+                    <div className="shrink-0 flex justify-center py-4">
+                        <button 
+                            className="h-10 w-40 bg-crimAccent rounded-3xl text-vibeBlack font-headings"
+                            onClick={() => {
+                                props.setShowLC(true)
+                                props.setDrawerOpen(false)
+                            }}
+                        >
+                            Log Out
+                        </button>
+                    </div>
+                )}
+
             </DrawerContent>
             </Drawer>
-            <a href="https://anime-hub-ebon.vercel.app/" className="cursor-pointer">
+            <Link to="/" className="cursor-pointer">
                 <img src={logo} alt="logo" className="h-10 w-auto ml-2" />
-            </a>
+            </Link>
             
-                    <a
-                    href="/"
+                    <Link
+                    to="/"
                     className={`flex phone:items-center transition-all duration-300 transform origin-left `}
                 >
                     <h1 className="text-3xl flex font-logo ml-2 font-extrabold text-crimAccent">
                     <span>Anime</span>{" "}
                     <span>Hub</span>
                     </h1>
-            </a>
+            </Link>
              <ul className="phone:hidden minitab:flex space-x-5 text-md ml-12 text-text-pri font-playful">
                     <li className="h-13 px-5 flex items-center font-headings cursor-pointer transition-all duration-75 hover:border-b-2 hover:border-b-crimAccent text-center">New</li>
                     <li className="h-13 px-5 flex items-center font-headings cursor-pointer transition-all duration-75 hover:border-b-2 hover:border-b-crimAccent text-center">Popular</li>
@@ -111,6 +139,3 @@ export default function Header(props){
         </div>
     )
 }
-
-
-{/**/}

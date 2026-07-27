@@ -153,7 +153,7 @@ const currentYear = new Date().getFullYear();
 
 
     return(
-        <div className={`mx-7 my-10 min-h-[32rem]`}>
+        <div className={`mx-7 my-10 min-h-[32rem] bg-vibeBlack`}>
 
             {place? <div className="bg-neutral-800 animate-pulse rounded-xl h-[4rem] minitab:w-[30rem] mb-3"></div> :
              <h1 
@@ -175,13 +175,11 @@ const currentYear = new Date().getFullYear();
                 {topContent}
                 </Suspense>}
             </div>
-            <DrawerContent className={"bg-vibeBlack border-none minitab:max-w-[60%] h-[80%] mx-auto"}>
                 <ErrorBoundary>
                     <Suspense fallback={<div>Loading...</div>}>
                     {selected && isOpen && <AnimeInfoDrawer item={selected} />}
                     </Suspense>
                 </ErrorBoundary>
-            </DrawerContent>
             </Drawer>
         </div>
     )

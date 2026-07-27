@@ -58,16 +58,15 @@ export default function SearchInput(){
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search anime..."
-          className={`h-8 w-[98%] border-2 mx-auto border-grayish text-text-pri outline-none
-                          active:border-crimAccent transition-all duration-300 ease-in-out focus:border-crimAccent
-                            rounded-2xl p-3`}
+          className={`h-8 w-full border-2 mx-auto text-text-pri outline-none border-crimAccent
+                            rounded-sm p-3`}
         />
 
         {query && (
-          <div className="absolute top-12 left-0 w-[100%] bg-vibeBlack border border-neutral-700 z-50 max-h-96 overflow-y-auto">
+          <div className="absolute top-12 left-0 w-full bg-vibeBlack border border-neutral-700 z-50 max-h-96 overflow-y-auto">
             
             {loading && (
-              <div className="flex w-[100%] space-5">
+              <div className="flex w-[100%] border-none space-5">
                 <AiOutlineLoading className='fill-crimAccent size-6 my-auto ml-2 spinFast'/><p className="font-playful text-crimAccent">Loading...</p>
               </div>
             )}
@@ -77,7 +76,7 @@ export default function SearchInput(){
                 key={anime.id}
                 className="flex items-center font-headings rounded-lg gap-3 p-2 hover:bg-neutral-800 cursor-pointer"
                 onClick={() => {
-                  navigate(`anime/${anime.title.english}`)
+                  navigate(`/anime/${anime.id}`)
                 }}
               >
                 <img

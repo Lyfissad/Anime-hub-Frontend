@@ -17,7 +17,7 @@ import { SliceStingByWords } from "./topAnime";
   export default function AnimeInfoDrawer({ item }) {
 
   const [imageLoaded, setImageLoaded] = useState(false)
-
+  const descriptionLength = window.innerWidth < 640 ? 30 : 60;
 
   useEffect(()=>{
     setImageLoaded(false)
@@ -27,7 +27,7 @@ import { SliceStingByWords } from "./topAnime";
   return (
 
     <>
-    <DrawerContent className="bg-vibeBlack text-text-pri h-dvh max-h-dvh border-none shadow-none outline-none overflow-y-auto">
+    <DrawerContent className={"bg-vibeBlack border-vibeBlack border-t-2 minitab:max-w-[60%] h-[85dvh] mx-auto overflow-y-auto"}>
       <DrawerHeader>
         <DrawerClose asChild>
             <IoIosCloseCircle 
@@ -47,7 +47,7 @@ import { SliceStingByWords } from "./topAnime";
           <h2 className="font-bold text-text-pri text-xl minitab:text-3xl mt-6 mb-5">
           {item.title.english || item.title.romaji || item.title.native}
           </h2>
-            {StringCleanDescription(SliceStingByWords(item.description || "No description", 60))}
+            {StringCleanDescription(SliceStingByWords(item.description || "No description", descriptionLength))}
         </DrawerDescription>
       <DrawerFooter>
         <div className="block space-y-2 mb-10 text-vibeBlacks mx-3">

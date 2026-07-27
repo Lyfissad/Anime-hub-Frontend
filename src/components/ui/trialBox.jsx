@@ -20,8 +20,7 @@ export default function TrialBox(){
             <div className="max-w-[110rem] phone:w-[21rem] minitab:w-[76%] minitab:max-w-[120rem]
              minitab:flex minitab:justify-center minitab:item-center h-[12rem] 
             phone:grid phone:place-items-center mx-auto my-10 bg-vibeBlack
-            rounded-3xl font-playful text-text-mute text-sm fade-in
-            bg-[#0b0c10] shadow-[0_0_40px_rgba(220,20,60,0.35)] fade-in">
+            rounded-3xl font-playful text-text-mute text-sm shadow-[0_0_40px_rgba(220,20,60,0.35)] fade-in">
 
                 <img src={logo} alt="logo" className="phone:hidden minitab:block minitab:size-18 minitab:ml-5 laptop:size-28 pc:size-36" />
                 
@@ -31,8 +30,10 @@ export default function TrialBox(){
                 </div>
 
                 <button className="phone:h-[2.5rem] phone:w-[18rem] minitab:w-[12rem] minitab:mr-5 minitab:relative
-                 minitab:top-5 pc:h-[3.5rem] pc:w-[20rem] pc:text-xl Bigpc:bg-green-500
-                -mt-4 mb-3 bg-crimAccent cursor-pointer font-headings text-vibeBlack">START FREE TRIAL</button>
+                 minitab:top-5 pc:h-[3.2rem] pc:w-[20rem] pc:text-xl
+                -mt-4 mb-3 bg-crimAccent cursor-pointer font-headings text-vibeBlack rounded-md"
+                onClick={()=>{alert("Not Implemented yet...")}}
+                >START FREE TRIAL</button>
 
             </div>}
         </div>
