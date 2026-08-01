@@ -26,17 +26,17 @@ Anime Hub is a full-stack web application that allows users to explore, search, 
 
 ## ⚙️ Features
 
-🔥 Anime discovery & search powered by the AniList GraphQL API
-🔥 Trending, seasonal, and currently airing anime sections
-🔥 Debounced anime search with real-time suggestions
-🔥 Dynamic anime pages with detailed information, ratings, genres, trailers, and descriptions
-🔥 Responsive anime information drawers optimized for mobile and desktop
-🔥 User authentication with Signup, Login, and Logout functionality
-🔥 NSFW content filtering with persistent user preferences
-🔥 Interactive ratings, trailers, and anime metadata
-🔥 Responsive UI built with React, Tailwind CSS, and ShadCN UI
-🔥 GraphQL data management and caching using Apollo Client
-🔥 Backend API built with Node.js, Express, and MongoDB
-🔥 Loading states, skeletons, animations, and error handling for a smoother UX
-🔥 Deployed full-stack application with separate frontend and backend services
+-🔥 Anime discovery & search powered by the AniList GraphQL API
+-🔥 Trending, seasonal, and currently airing anime sections
+-🔥 Debounced anime search with real-time suggestions
+-🔥 Dynamic anime pages with detailed information, ratings, genres, trailers, and descriptions
+-🔥 Responsive anime information drawers optimized for mobile and desktop
+-🔥 User authentication with Signup, Login, and Logout functionality
+-🔥 NSFW content filtering with persistent user preferences
+-🔥 Interactive ratings, trailers, and anime metadata
+-🔥 Responsive UI built with React, Tailwind CSS, and ShadCN UI
+-🔥 GraphQL data management and caching using Apollo Client
+-🔥 Backend API built with Node.js, Express, and MongoDB
+-🔥 Loading states, skeletons, animations, and error handling for a smoother UX
+-🔥 Deployed full-stack application with separate frontend and backend services
 
